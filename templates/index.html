@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RSS Reader</title>
+</head>
+<body>
+    <h1>RSS Reader</h1>
+
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <label for="url">Enter RSS Feed URL:</label>
+        <input type="url" id="url" name="url" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if feeds %}
+        <h2>Downloaded Feeds</h2>
+        <ul>
+            {% for feed in feeds %}
+                <li><a href="{% url 'articles' feed.id %}">{{ feed.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
+
+
